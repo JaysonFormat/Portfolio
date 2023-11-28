@@ -1,3 +1,3 @@
 # Portfolio
 
-https://jaysonformat.github.io/Portfolio/
+https://jaysonformat.github.io/portfolio/
