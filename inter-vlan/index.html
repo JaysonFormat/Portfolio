@@ -650,6 +650,10 @@
 <h1 id="layer-3-switch-inter-vlan-with-dhcp-and-nat">Layer 3 Switch Inter-VLAN with DHCP and NAT</h1>
 <p><img alt="Profile" src="../images/photo1.PNG" /></p>
 <h2 id="configuring-sw1-l3-switch">Configuring SW1 (L3 Switch)</h2>
+<div class="admonition abstract">
+<p class="admonition-title">Configuration</p>
+<p>If you prefer not to configure manually, I've saved the startup config on my GitHub page. Click the GitHub link at the top right.</p>
+</div>
 <p>On SW1, set the hostname to 'SW1', create the necessary VLANs 10, 20, 30, and assign G1/1, G1/2, and G1/3 to their respective VLANs based on the diagram.</p>
 <div class="highlight"><pre><span></span><code>Switch&gt;enable
 Switch#config terminal
@@ -724,16 +728,25 @@ SW1(config)#interface vlan10
 SW1(config-if)#ip address 172.10.10.254 255.255.255.0
 SW1(config-if)#ip helper-address
 SW1(config-if)#ip helper-address 10.0.10.1
+SW1(config-if)#no shutdown
 SW1(config-if)#
 SW1(config-if)#int vlan 20
 SW1(config-if)#ip address 172.20.20.254 255.255.255.0
 SW1(config-if)#ip helper-address 10.0.10.1
+SW1(config-if)#no shutdown
 SW1(config-if)#
 SW1(config-if)#int vlan 30
 SW1(config-if)#ip address 172.30.30.254 255.255.255.0
 SW1(config-if)#ip helper-address 10.0.10.1
+SW1(config-if)#no shutdown
 SW1(config-if)#
 SW1(config-if)#end
+SW1#
+SW1#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+SW1(config)#
+SW1(config)#ip routing
+SW1(config)#
 </code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -758,12 +771,6 @@ GigabitEthernet3/3     unassigned      YES unset  down                  down
 Vlan10                 172.10.10.254   YES NVRAM  up                    up
 Vlan20                 172.20.20.254   YES NVRAM  up                    up
 Vlan30                 172.30.30.254   YES NVRAM  up                    up
-SW1#
-SW1#configure terminal
-Enter configuration commands, one per line.  End with CNTL/Z.
-SW1(config)#
-SW1(config)#ip routing
-SW1(config)#
 </code></pre></div>
 </div>
 </div>
@@ -1032,7 +1039,7 @@ R1#
 <p>Any routes not found in SW1's routing table will be redirected to R1, serving as the default route.</p>
 <div class="highlight"><pre><span></span><code>SW1#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
-SW1(config)#ip route 0.0.0.0 0.0.0.0 10.0.11.1
+SW1(config)#ip route 0.0.0.0 0.0.0.0 10.0.11.2
 SW1(config)#do show ip route
 Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
        D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
@@ -1137,6 +1144,30 @@ R1(config)#
 <p class="admonition-title">Note</p>
 <p>In this configuration, three static routes are used, but '<code>ip route 172.0.0.0 255.0.0.0 10.0.11.2</code>' is also an option. Other methods, such as setting up dynamic routing, can be employed as long as they can route back to SW1.</p>
 </div>
+<p><div class="highlight"><pre><span></span><code>PC1&gt;
+PC1&gt; ping 8.8.8.8
+84 bytes from 8.8.8.8 icmp_seq=1 ttl=57 time=85.578 ms
+84 bytes from 8.8.8.8 icmp_seq=2 ttl=57 time=41.087 ms
+84 bytes from 8.8.8.8 icmp_seq=3 ttl=57 time=131.509 ms
+84 bytes from 8.8.8.8 icmp_seq=4 ttl=57 time=43.668 ms
+84 bytes from 8.8.8.8 icmp_seq=5 ttl=57 time=42.858 ms
+
+PC1&gt; ping 4.2.2.2
+84 bytes from 4.2.2.2 icmp_seq=1 ttl=53 time=76.136 ms
+84 bytes from 4.2.2.2 icmp_seq=2 ttl=53 time=75.116 ms
+84 bytes from 4.2.2.2 icmp_seq=3 ttl=53 time=70.754 ms
+84 bytes from 4.2.2.2 icmp_seq=4 ttl=53 time=87.615 ms
+84 bytes from 4.2.2.2 icmp_seq=5 ttl=53 time=61.782 ms
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>PC5&gt; ping 8.8.8.8
+84 bytes from 8.8.8.8 icmp_seq=1 ttl=57 time=50.912 ms
+84 bytes from 8.8.8.8 icmp_seq=2 ttl=57 time=45.580 ms
+84 bytes from 8.8.8.8 icmp_seq=3 ttl=57 time=77.687 ms
+84 bytes from 8.8.8.8 icmp_seq=4 ttl=57 time=82.768 ms
+84 bytes from 8.8.8.8 icmp_seq=5 ttl=57 time=54.593 ms
+
+PC5&gt;
+</code></pre></div></p>
 
 
 
