@@ -14,7 +14,7 @@
         <link rel="prev" href="../training/">
       
       
-        <link rel="next" href="../tools/">
+        <link rel="next" href="../lab2/">
       
       
       <link rel="icon" href="../images/dog.jpg">
@@ -461,6 +461,8 @@
       
         
       
+        
+      
     
     
     
@@ -546,18 +548,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configuring-sw1-l3-switch" class="md-nav__link">
+  <a href="#configuring-core1-l3-switch" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring SW1 (L3 Switch)
+      Configuring Core1 (L3 Switch)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-sw2-l2-switch" class="md-nav__link">
+  <a href="#configuring-access1-l2-switch" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring SW2 (L2 Switch)
+      Configuring Access1 (L2 Switch)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-access2-l2-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Access2 (L2 Switch)
     </span>
   </a>
   
@@ -585,6 +596,26 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lab 2
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -649,26 +680,26 @@
 
 <h1 id="layer-3-switch-inter-vlan-with-dhcp-and-nat">Layer 3 Switch Inter-VLAN with DHCP and NAT</h1>
 <p><img alt="Profile" src="../images/photo1.PNG" /></p>
-<h2 id="configuring-sw1-l3-switch">Configuring SW1 (L3 Switch)</h2>
+<h2 id="configuring-core1-l3-switch">Configuring Core1 (L3 Switch)</h2>
 <div class="admonition abstract">
 <p class="admonition-title">Configuration</p>
 <p>If you prefer not to configure manually, I've saved the startup config on my GitHub page. Click the GitHub link at the top right.</p>
 </div>
-<p>On SW1, set the hostname to 'SW1', create the necessary VLANs 10, 20, 30, and assign G1/1, G1/2, and G1/3 to their respective VLANs based on the diagram.</p>
+<p>On Core1, set the hostname to 'Core1', create the necessary VLANs 10, 20, 30, and assign G1/1, G1/2, and G1/3 to their respective VLANs based on the diagram.</p>
 <div class="highlight"><pre><span></span><code>Switch&gt;enable
 Switch#config terminal
 Enter configuration commands, one per line.  End with CNTL/Z.
-Switch(config)#hostname SW1
-SW1(config)#
-SW1(config)#vlan 10
-SW1(config-vlan)#vlan 20
-SW1(config-vlan)#vlan 30
-SW1(config-vlan)#
+Switch(config)#hostname Core1
+Core1(config)#
+Core1(config)#vlan 10
+Core1(config-vlan)#vlan 20
+Core1(config-vlan)#vlan 30
+Core1(config-vlan)#
 </code></pre></div>
 <p>Now that the VLANs are created, type the command 'show vlan brief' to check the necessary VLANs</p>
-<div class="highlight"><pre><span></span><code>SW1(config-vlan)#
-SW1(config-vlan)#end
-SW1#show vlan brief
+<div class="highlight"><pre><span></span><code>Core1(config-vlan)#
+Core1(config-vlan)#end
+Core1#show vlan brief
 VLAN Name                             Status    Ports
 ---- -------------------------------- --------- -------------------------------
 1    default                          active    Gi0/3, Gi1/0, Gi1/1, Gi1/2
@@ -683,74 +714,42 @@ VLAN Name                             Status    Ports
 1004 fddinet-default                  act/unsup
 1005 trnet-default                    act/unsup
 
-SW1#
+Core1#
 </code></pre></div>
-<p>Assign the necessary interfaces to their respective VLANs</p>
-<p><div class="highlight"><pre><span></span><code>SW1#
-SW1#conf t
-SW1(config)#
-SW1(config)#interface g1/1
-SW1(config-if)#switchport access vlan 10
-SW1(config-if)#
-SW1(config-if)#int g1/2
-SW1(config-if)#switchport access vlan 20
-SW1(config-if)#
-SW1(config-if)#int g1/3
-SW1(config-if)#switchport access vlan 30
-SW1(config-if)#end
-SW1#
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>SW1#
-SW1#show vlan brief
-
-VLAN Name                             Status    Ports
----- -------------------------------- --------- -------------------------------
-1    default                          active    Gi0/3, Gi1/0, Gi2/0, Gi2/1
-                                                Gi2/2, Gi2/3, Gi3/0, Gi3/1
-                                                Gi3/2, Gi3/3
-10   VLAN0010                         active    Gi1/1
-20   VLAN0020                         active    Gi1/2
-30   VLAN0030                         active    Gi1/3
-1002 fddi-default                     act/unsup
-1003 token-ring-default               act/unsup
-1004 fddinet-default                  act/unsup
-1005 trnet-default                    act/unsup
-SW1#
-</code></pre></div></p>
-<p>Now, create SVIs (Switched Virtual Interfaces); these will serve as the default gateways for each VLAN. Additionally, add the IP address of the DHCP Server to inform SW1 on how to redirect DHCP broadcast traffic. Use the command '<code>ip helper-address {server}</code>' and use <code>show ip interface brief</code> to verify the config.To enable routing between VLANs, execute the command '<code>ip routing</code>'.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">SW1 Config</label><label for="__tabbed_1_2">SW1 Verify</label></div>
+<p>Now, create SVIs (Switched Virtual Interfaces); these will serve as the default gateways for each VLAN. Additionally, add the IP address of the DHCP Server to inform Core1 on how to redirect DHCP broadcast traffic. Use the command '<code>ip helper-address {server}</code>' and use <code>show ip interface brief</code> to verify the config.To enable routing between VLANs, execute the command '<code>ip routing</code>'.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Core1 Config</label><label for="__tabbed_1_2">Core1 Verify</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code>SW1#conf t
+<div class="highlight"><pre><span></span><code>Core1#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
-SW1(config)#
-SW1(config)#interface vlan10
-SW1(config-if)#ip address 172.10.10.254 255.255.255.0
-SW1(config-if)#ip helper-address
-SW1(config-if)#ip helper-address 10.0.10.1
-SW1(config-if)#no shutdown
-SW1(config-if)#
-SW1(config-if)#int vlan 20
-SW1(config-if)#ip address 172.20.20.254 255.255.255.0
-SW1(config-if)#ip helper-address 10.0.10.1
-SW1(config-if)#no shutdown
-SW1(config-if)#
-SW1(config-if)#int vlan 30
-SW1(config-if)#ip address 172.30.30.254 255.255.255.0
-SW1(config-if)#ip helper-address 10.0.10.1
-SW1(config-if)#no shutdown
-SW1(config-if)#
-SW1(config-if)#end
-SW1#
-SW1#configure terminal
+Core1(config)#
+Core1(config)#interface vlan10
+Core1(config-if)#ip address 172.10.10.254 255.255.255.0
+Core1(config-if)#ip helper-address
+Core1(config-if)#ip helper-address 10.0.10.1
+Core1(config-if)#no shutdown
+Core1(config-if)#
+Core1(config-if)#int vlan 20
+Core1(config-if)#ip address 172.20.20.254 255.255.255.0
+Core1(config-if)#ip helper-address 10.0.10.1
+Core1(config-if)#no shutdown
+Core1(config-if)#
+Core1(config-if)#int vlan 30
+Core1(config-if)#ip address 172.30.30.254 255.255.255.0
+Core1(config-if)#ip helper-address 10.0.10.1
+Core1(config-if)#no shutdown
+Core1(config-if)#
+Core1(config-if)#end
+Core1#
+Core1#configure terminal
 Enter configuration commands, one per line.  End with CNTL/Z.
-SW1(config)#
-SW1(config)#ip routing
-SW1(config)#
+Core1(config)#
+Core1(config)#ip routing
+Core1(config)#
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code>SW1#show ip interface brief
+<div class="highlight"><pre><span></span><code>Core1#show ip interface brief
 Interface              IP-Address      OK? Method Status                Protocol
 GigabitEthernet0/2     unassigned      YES unset  up                    up
 GigabitEthernet0/3     unassigned      YES unset  down                  down
@@ -775,23 +774,23 @@ Vlan30                 172.30.30.254   YES NVRAM  up                    up
 </div>
 </div>
 </div>
-<p>Now, we create routed ports connected to the server and router. The network between the server and SW1 is 10.0.10.0/30, and between R1 and SW1 is 10.0.11.0/30.</p>
-<p><div class="highlight"><pre><span></span><code>SW1(config)#
-SW1(config)#interface g0/0
-SW1(config-if)#no switchport
-SW1(config-if)#
-SW1(config-if)#ip address 10.0.11.2 255.255.255.252
-SW1(config-if)#no shutdown
-SW1(config-if)#
-SW1(config-if)#interface g0/1
-SW1(config-if)#no switchport
-SW1(config-if)#ip address 10.0.10.2 255.255.255.252
-SW1(config-if)#no shutdown
-SW1(config-if)#end
-SW1#
+<p>Now, we create routed ports connected to the server and router. The network between the server and Core1 is 10.0.10.0/30, and between R1 and Core1 is 10.0.11.0/30.</p>
+<p><div class="highlight"><pre><span></span><code>Core1(config)#
+Core1(config)#interface g0/0
+Core1(config-if)#no switchport
+Core1(config-if)#
+Core1(config-if)#ip address 10.0.11.2 255.255.255.252
+Core1(config-if)#no shutdown
+Core1(config-if)#
+Core1(config-if)#interface g0/1
+Core1(config-if)#no switchport
+Core1(config-if)#ip address 10.0.10.2 255.255.255.252
+Core1(config-if)#no shutdown
+Core1(config-if)#end
+Core1#
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>SW1#
-SW1#show ip interface brief | exc unass
+<div class="highlight"><pre><span></span><code>Core1#
+Core1#show ip interface brief | exc unass
 Interface              IP-Address      OK? Method Status                Protocol
 GigabitEthernet0/0     10.0.11.2       YES NVRAM  up                    up
 GigabitEthernet0/1     10.0.10.2       YES NVRAM  up                    up
@@ -799,91 +798,141 @@ Vlan10                 172.10.10.254   YES NVRAM  up                    up
 Vlan20                 172.20.20.254   YES NVRAM  up                    up
 Vlan30                 172.30.30.254   YES NVRAM  up                    up
 
-SW1#
+Core1#
 </code></pre></div></p>
-<p>Now, configure a trunk to the neighboring switch, SW2, allowing only the necessary VLANs and disabling DTP.</p>
+<p>Now, configure a trunk to the neighboring switch, Access1 and Acess2, allowing only the necessary VLANs and disabling DTP.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If the switch supports both <strong>ISL and 802.1Q</strong>, use the command '<code>switchport trunk encapsulation dot1q</code>'.</p>
 </div>
-<p><div class="highlight"><pre><span></span><code>SW1#conf t
+<p><div class="highlight"><pre><span></span><code>Core1#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
-SW1(config)#
-SW1(config)#int g0/2
-SW1(config-if)#
-SW1(config-if)#switchport trunk encapsulation dot1q
-SW1(config-if)#switchport mode trunk
-SW1(config-if)#
-SW1(config-if)#switchport trunk allowed vlan 10,20,30
-SW1(config-if)#switchport nonegotiate
-SW1(config-if)#end
-SW1#
+Core1(config)#
+Core1(config)#int range g0/2 - 3
+Core1(config-if-range)#
+Core1(config-if-range)#switchport trunk encapsulation dot1q
+Core1(config-if-range)#switchport mode trunk
+Core1(config-if-range)#
+Core1(config-if-range)#switchport trunk allowed vlan 10,20,30
+Core1(config-if-range)#switchport nonegotiate
+Core1(config-if-range)#end
+Core1#
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>SW1#
-SW1#show interface trunk
+<div class="highlight"><pre><span></span><code>Core1#
+Core1#show interface trunk
 
 Port        Mode             Encapsulation  Status        Native vlan
 Gi0/2       on               802.1q         trunking      1
+Gi0/3       on               802.1q         trunking      1
 
 Port        Vlans allowed on trunk
 Gi0/2       10,20,30
+Gi0/3       10,20,30
 
 Port        Vlans allowed and active in management domain
 Gi0/2       10,20,30
+Gi0/3       10,20,30
 
 Port        Vlans in spanning tree forwarding state and not pruned
 Gi0/2       10,20,30
-SW1#
+Gi0/3       10,20,30
+Core1#
 </code></pre></div></p>
-<h2 id="configuring-sw2-l2-switch">Configuring SW2 (L2 Switch)</h2>
-<p>Now, add the interfaces to their necessary VLANs on SW2 and configure a trunk to the neighboring switch, allowing only the necessary VLANs and disabling DTP.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Part_1</label><label for="__tabbed_2_2">Part_2</label></div>
+<h2 id="configuring-access1-l2-switch">Configuring Access1 (L2 Switch)</h2>
+<p>Now, add the interfaces to their necessary VLANs on Access1 and configure a trunk to the neighboring switch, allowing only the necessary VLANs and disabling DTP.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Access1 Config</label><label for="__tabbed_2_2">Access1 Config part2</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>Switch&gt;enable
 Switch#config terminal
 Enter configuration commands, one per line.  End with CNTL/Z.
-Switch(config)#hostname SW2
-SW2(config)#
-SW2(config)#vlan 10
-SW2(config-vlan)#vlan 20
-SW2(config-vlan)#vlan 30
-SW2(config-vlan)#
-SW2#
-SW2#conf t
-SW2(config)#
-SW2(config)#interface g1/1
-SW2(config-if)#switchport access vlan 10
-SW2(config-if)#
-SW2(config-if)#int g1/2
-SW2(config-if)#switchport access vlan 20
-SW2(config-if)#
-SW2(config-if)#int g1/3
-SW2(config-if)#switchport access vlan 30
-SW2(config-if)#end
-SW2#
+Switch(config)#hostname Access1
+Access1(config)#
+Access1(config)#vlan 10
+Access1(config-vlan)#vlan 20
+Access1(config-vlan)#vlan 30
+Access1(config-vlan)#
+Access1#
+Access1#conf t
+Access1(config)#
+Access1(config)#interface e1/1
+Access1(config-if)#switchport access vlan 10
+Access1(config-if)#
+Access1(config-if)#int e1/2
+Access1(config-if)#switchport access vlan 20
+Access1(config-if)#
+Access1(config-if)#int e1/3
+Access1(config-if)#switchport access vlan 30
+Access1(config-if)#end
+Access1#
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code>SW2#conf t
+<div class="highlight"><pre><span></span><code>Access1#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
-SW2(config)#
-SW2(config)#int g0/2
-SW2(config-if)#
-SW2(config-if)#switchport trunk encapsulation dot1q
-SW2(config-if)#switchport mode trunk
-SW2(config-if)#
-SW2(config-if)#switchport trunk allowed vlan 10,20,30
-SW2(config-if)#switchport nonegotiate
-SW2(config-if)#end
-SW2#
+Access1(config)#
+Access1(config)#int e0/3
+Access1(config-if)#
+Access1(config-if)#switchport trunk encapsulation dot1q
+Access1(config-if)#switchport mode trunk
+Access1(config-if)#
+Access1(config-if)#switchport trunk allowed vlan 10,20,30
+Access1(config-if)#switchport nonegotiate
+Access1(config-if)#end
+Access1#
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="configuring-access2-l2-switch">Configuring Access2 (L2 Switch)</h2>
+<p>Now, add the interfaces to their necessary VLANs on Access2 and configure a trunk to the neighboring switch, allowing only the necessary VLANs and disabling DTP.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Access2 Config</label><label for="__tabbed_3_2">Access2 Config part2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>Switch&gt;enable
+Switch#config terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#hostname Access2
+Access2(config)#
+Access2(config)#vlan 10
+Access2(config-vlan)#vlan 20
+Access2(config-vlan)#vlan 30
+Access2(config-vlan)#
+Access2#
+Access2#conf t
+Access2(config)#
+Access2(config)#interface e1/1
+Access2(config-if)#switchport access vlan 10
+Access2(config-if)#
+Access2(config-if)#int e1/2
+Access2(config-if)#switchport access vlan 20
+Access2(config-if)#
+Access2(config-if)#int e1/3
+Access2(config-if)#switchport access vlan 30
+Access2(config-if)#end
+Access2#
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>Access2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Access2(config)#
+Access2(config)#int e0/2
+Access2(config-if)#
+Access2(config-if)#switchport trunk encapsulation dot1q
+Access2(config-if)#switchport mode trunk
+Access2(config-if)#
+Access2(config-if)#switchport trunk allowed vlan 10,20,30
+Access2(config-if)#switchport nonegotiate
+Access2(config-if)#end
+Access2#
 </code></pre></div>
 </div>
 </div>
 </div>
 <h2 id="configuring-router-as-dhcp-server">Configuring Router as DHCP Server</h2>
 <p>As for the server, instead of using a Windows server, we will use a router to perform DHCP.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Configure</label><label for="__tabbed_3_2">Verify</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Configure Server</label><label for="__tabbed_4_2">Verify Server</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>DHCP#
@@ -914,7 +963,7 @@ DHCP(config)#ip dhcp excluded-address 172.30.30.254
 DHCP(config)#
 </code></pre></div>
 <p>To ensure that PCs in different VLANs receive an IP address, create a DHCP pool that includes the range of addresses and specifies the default gateway.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Configure</label><label for="__tabbed_4_2">Verify</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Configure</label><label for="__tabbed_5_2">Verify</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>DHCP(config)#
@@ -994,8 +1043,8 @@ L        10.0.10.1/32 is directly connected, Ethernet0/0
 DHCP(config)#
 </code></pre></div>
 <h2 id="connecting-pcs-to-the-internet">Connecting PCs to the Internet</h2>
-<p>Configure the interfaces that are connected to the internet and SW1. FastEthernet 0/1 will use DHCP for addressing.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Configure</label><label for="__tabbed_5_2">Verify</label></div>
+<p>Configure the interfaces that are connected to the internet and Core1. FastEthernet 0/1 will use DHCP for addressing.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Configure</label><label for="__tabbed_6_2">Verify</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>R1#conf t
@@ -1023,24 +1072,16 @@ R1(config-if)#
 Interface                  IP-Address      OK? Method Status                Protocol
 FastEthernet0/0            10.0.11.1       YES manual up                    up
 FastEthernet0/1            192.168.1.12    YES DHCP   up                    up
-Ethernet1/0                unassigned      YES unset  administratively down down
-Ethernet1/1                unassigned      YES unset  administratively down down
-Ethernet1/2                unassigned      YES unset  administratively down down
-Ethernet1/3                unassigned      YES unset  administratively down down
-Ethernet1/4                unassigned      YES unset  administratively down down
-Ethernet1/5                unassigned      YES unset  administratively down down
-Ethernet1/6                unassigned      YES unset  administratively down down
-Ethernet1/7                unassigned      YES unset  administratively down down
 R1#
 </code></pre></div>
 </div>
 </div>
 </div>
-<p>Any routes not found in SW1's routing table will be redirected to R1, serving as the default route.</p>
-<div class="highlight"><pre><span></span><code>SW1#conf t
+<p>Any routes not found in Core1's routing table will be redirected to R1, serving as the default route.</p>
+<div class="highlight"><pre><span></span><code>Core1#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
-SW1(config)#ip route 0.0.0.0 0.0.0.0 10.0.11.2
-SW1(config)#do show ip route
+Core1(config)#ip route 0.0.0.0 0.0.0.0 10.0.11.2
+Core1(config)#do show ip route
 Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
        D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
        N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
@@ -1071,7 +1112,7 @@ L        172.30.30.254/32 is directly connected, Vlan30
 SW1(config)#
 </code></pre></div>
 <p>In Config 1, define which interface will be the outside and inside interface using the commands '<code>ip nat inside</code>' and '<code>ip nat outside.</code>' In Config 2, use an ACL to identify traffic rather than control the traffic.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Config 1</label><label for="__tabbed_6_2">Config 2</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Config 1</label><label for="__tabbed_7_2">Config 2</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>R1#conf t
@@ -1102,7 +1143,7 @@ R1(config)#
 <p>In this method, we use the outside interface instead of allocating public addresses or implementing static one-to-one mapping.</p>
 </div>
 <p>Use a static route so that R1 knows how to route back to the NATed addresses.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">R1 Config</label><label for="__tabbed_7_2">R1 Verify</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">R1 Config</label><label for="__tabbed_8_2">R1 Verify</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>R1(config)#
@@ -1214,13 +1255,13 @@ PC5&gt;
         
         
           
-          <a href="../tools/" class="md-footer__link md-footer__link--next" aria-label="Next: Tools">
+          <a href="../lab2/" class="md-footer__link md-footer__link--next" aria-label="Next: Lab 2">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Tools
+                Lab 2
               </div>
             </div>
             <div class="md-footer__button md-icon">
