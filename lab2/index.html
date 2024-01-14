@@ -76,6 +76,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#lab-connectivity-and-addresses" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -84,7 +89,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="Jayson Laurence M. Galicia" class="md-header__button md-logo" aria-label="Jayson Laurence M. Galicia" data-md-component="logo">
       
@@ -199,14 +206,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -242,7 +243,7 @@
   
     
   
-  GNS3 Labs
+  Network Labs
 
         </a>
       </li>
@@ -290,7 +291,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -385,7 +392,7 @@
             
   
   <span class="md-ellipsis">
-    GNS3 Labs
+    Network Labs
   </span>
   
 
@@ -395,7 +402,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            GNS3 Labs
+            Network Labs
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -432,6 +439,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Lab 2 (Not Finish)
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -441,6 +459,50 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab-connectivity-and-addresses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lab Connectivity and Addresses
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#redundancy-and-load-balance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redundancy and Load Balance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interface-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interface Connection
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -598,7 +660,115 @@
 
   <h1>Lab 2 (Not Finish)</h1>
 
-<p><img alt="Profile2" src="../images/lab2.PNG" /></p>
+<p><img alt="Profile2" src="../images/test.jpg" /></p>
+<h2 id="lab-connectivity-and-addresses"><strong>Lab Connectivity and Addresses</strong></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Subnets and VLANS</th>
+<th style="text-align: center;"></th>
+<th></th>
+<th style="text-align: center;">Virtual IP Default Gateway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">VLAN 10</td>
+<td style="text-align: center;">172.20.10.1 – 172.20.10.253</td>
+<td></td>
+<td style="text-align: center;">172.20.10.254</td>
+</tr>
+<tr>
+<td style="text-align: center;">VLAN 20</td>
+<td style="text-align: center;">172.20.20.1 – 172.20.20.253</td>
+<td></td>
+<td style="text-align: center;">172.20.20.254</td>
+</tr>
+<tr>
+<td style="text-align: center;">VLAN 30</td>
+<td style="text-align: center;">172.20.30.1 – 172.20.30.253</td>
+<td></td>
+<td style="text-align: center;">172.20.30.254</td>
+</tr>
+<tr>
+<td style="text-align: center;">VLAN 40</td>
+<td style="text-align: center;">172.20.40.1 – 172.20.40.253</td>
+<td></td>
+<td style="text-align: center;">172.20.40.254</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Device</th>
+<th></th>
+<th style="text-align: center;">Network</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Server</td>
+<td></td>
+<td style="text-align: center;">172.20.100.0/24</td>
+</tr>
+<tr>
+<td style="text-align: center;">Core1 IP</td>
+<td></td>
+<td style="text-align: center;">1.1.1.1/32</td>
+</tr>
+<tr>
+<td style="text-align: center;">Core2 IP</td>
+<td></td>
+<td style="text-align: center;">2.2.2.2/32</td>
+</tr>
+</tbody>
+</table>
+<h2 id="redundancy-and-load-balance"><strong>Redundancy and Load Balance</strong></h2>
+<p><img alt="Pic_redundant" src="../images/redundancy.jpg" /></p>
+<h2 id="interface-connection"><strong>Interface Connection</strong></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Device 1</th>
+<th></th>
+<th style="text-align: center;">Device 2</th>
+<th></th>
+<th style="text-align: center;">Device 1 Link</th>
+<th></th>
+<th style="text-align: center;">Device 2 Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">PH-CORE1</td>
+<td></td>
+<td style="text-align: center;">PH-ACC-1</td>
+<td></td>
+<td style="text-align: center;">Ethernet 0/0</td>
+<td></td>
+<td style="text-align: center;">Ethernet 0/0</td>
+</tr>
+<tr>
+<td style="text-align: center;">PH-CORE2</td>
+<td></td>
+<td style="text-align: center;">PH-ACC-1</td>
+<td></td>
+<td style="text-align: center;">Ethernet 0/0</td>
+<td></td>
+<td style="text-align: center;">Ethernet 0/1</td>
+</tr>
+<tr>
+<td style="text-align: center;">PH-CORE1</td>
+<td></td>
+<td style="text-align: center;">PH-ACC-2</td>
+<td></td>
+<td style="text-align: center;">Ethernet 0/1</td>
+<td></td>
+<td style="text-align: center;">Ethernet 0/0</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -685,7 +855,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.footer", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.footer", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.6c14ae12.min.js"></script>
