@@ -660,115 +660,19 @@
 
   <h1>Lab 2 (Not Finish)</h1>
 
-<p><img alt="Profile2" src="../images/test.jpg" /></p>
+<p><img alt="Profile2" src="../images/test.jpg" width="750" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this lab, I use Cisco images that only support Ethernet speed because I need a lightweight option to build the lab. However, whether you're going to build this lab physically or virtually, it's going to be the same.</p>
+</div>
 <h2 id="lab-connectivity-and-addresses"><strong>Lab Connectivity and Addresses</strong></h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Subnets and VLANS</th>
-<th style="text-align: center;"></th>
-<th></th>
-<th style="text-align: center;">Virtual IP Default Gateway</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">VLAN 10</td>
-<td style="text-align: center;">172.20.10.1 – 172.20.10.253</td>
-<td></td>
-<td style="text-align: center;">172.20.10.254</td>
-</tr>
-<tr>
-<td style="text-align: center;">VLAN 20</td>
-<td style="text-align: center;">172.20.20.1 – 172.20.20.253</td>
-<td></td>
-<td style="text-align: center;">172.20.20.254</td>
-</tr>
-<tr>
-<td style="text-align: center;">VLAN 30</td>
-<td style="text-align: center;">172.20.30.1 – 172.20.30.253</td>
-<td></td>
-<td style="text-align: center;">172.20.30.254</td>
-</tr>
-<tr>
-<td style="text-align: center;">VLAN 40</td>
-<td style="text-align: center;">172.20.40.1 – 172.20.40.253</td>
-<td></td>
-<td style="text-align: center;">172.20.40.254</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Device</th>
-<th></th>
-<th style="text-align: center;">Network</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">Server</td>
-<td></td>
-<td style="text-align: center;">172.20.100.0/24</td>
-</tr>
-<tr>
-<td style="text-align: center;">Core1 IP</td>
-<td></td>
-<td style="text-align: center;">1.1.1.1/32</td>
-</tr>
-<tr>
-<td style="text-align: center;">Core2 IP</td>
-<td></td>
-<td style="text-align: center;">2.2.2.2/32</td>
-</tr>
-</tbody>
-</table>
+<p><img alt="pic_subnets" src="../images/vlans.jpg" width="700" /></p>
+<p><img alt="pic_subnets" src="../images/vlans2.jpg" width="700" /></p>
 <h2 id="redundancy-and-load-balance"><strong>Redundancy and Load Balance</strong></h2>
 <p><img alt="Pic_redundant" src="../images/redundancy.jpg" /></p>
 <h2 id="interface-connection"><strong>Interface Connection</strong></h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Device 1</th>
-<th></th>
-<th style="text-align: center;">Device 2</th>
-<th></th>
-<th style="text-align: center;">Device 1 Link</th>
-<th></th>
-<th style="text-align: center;">Device 2 Link</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">PH-CORE1</td>
-<td></td>
-<td style="text-align: center;">PH-ACC-1</td>
-<td></td>
-<td style="text-align: center;">Ethernet 0/0</td>
-<td></td>
-<td style="text-align: center;">Ethernet 0/0</td>
-</tr>
-<tr>
-<td style="text-align: center;">PH-CORE2</td>
-<td></td>
-<td style="text-align: center;">PH-ACC-1</td>
-<td></td>
-<td style="text-align: center;">Ethernet 0/0</td>
-<td></td>
-<td style="text-align: center;">Ethernet 0/1</td>
-</tr>
-<tr>
-<td style="text-align: center;">PH-CORE1</td>
-<td></td>
-<td style="text-align: center;">PH-ACC-2</td>
-<td></td>
-<td style="text-align: center;">Ethernet 0/1</td>
-<td></td>
-<td style="text-align: center;">Ethernet 0/0</td>
-</tr>
-</tbody>
-</table>
+<p><img alt="pic_interface" src="../images/interface.jpg" width="700" />
+<img alt="pic_interface" src="../images/pc_connection.jpg" width="700" /></p>
 
 
 
