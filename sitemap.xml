@@ -2,42 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://jgaliciaIT.github.io/</loc>
-         <lastmod>2024-02-29</lastmod>
+         <lastmod>2024-03-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jgaliciaIT.github.io/certs/</loc>
-         <lastmod>2024-02-29</lastmod>
+         <lastmod>2024-03-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jgaliciaIT.github.io/inter-vlan/</loc>
-         <lastmod>2024-02-29</lastmod>
+         <lastmod>2024-03-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jgaliciaIT.github.io/lab2/</loc>
-         <lastmod>2024-02-29</lastmod>
+         <lastmod>2024-03-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jgaliciaIT.github.io/lab3/</loc>
-         <lastmod>2024-02-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jgaliciaIT.github.io/lab4/</loc>
-         <lastmod>2024-02-29</lastmod>
+         <lastmod>2024-03-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jgaliciaIT.github.io/tools/</loc>
-         <lastmod>2024-02-29</lastmod>
+         <lastmod>2024-03-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jgaliciaIT.github.io/training/</loc>
-         <lastmod>2024-02-29</lastmod>
+         <lastmod>2024-03-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
