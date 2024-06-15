@@ -1,26 +1,26 @@
 <!doctype html>
 <html>
     <head>
-                <title>Network Design with Integrated Firewall Solutions - JAYSON LAURENCE GALICIA</title>
+                <title>JAYSON LAURENCE GALICIA</title>
 
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
             
-            <link rel="canonical" href="https://jgaliciaIT.github.io/lab2/">
+            
             
 
             
-                <link  rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+                <link  rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
             
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
                         <script>hljs.initHighlightingOnLoad();</script>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-            <link rel="stylesheet" href="../assets/css/main.min.css">
-                <script src="../search/main.js"></script>
+            <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="./assets/css/main.min.css">
+                <script src="./search/main.js"></script>
 
             
                 
@@ -60,25 +60,25 @@
             <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="
-                            nav-link text-gray text-decoration-none" href="..">[Home]</a>
+                            nav-link text-gray text-decoration-none" href="./.">[Home]</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class=" active 
+                            <a class="
                             nav-link dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">[Home Labs]</a>
                             <ul class="dropdown-menu">
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="./" class="dropdown-item text-decoration-none  active ">Network Design with Integrated Firewall Solutions</a>
+        <a href="./lab2/" class="dropdown-item text-decoration-none ">Network Design with Integrated Firewall Solutions</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../inter-vlan/" class="dropdown-item text-decoration-none ">Layer 3 Switch Inter-VLAN with DHCP and NAT</a>
+        <a href="./inter-vlan/" class="dropdown-item text-decoration-none ">Layer 3 Switch Inter-VLAN with DHCP and NAT</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../lab3/" class="dropdown-item text-decoration-none ">Window Server Active Directory Implementation</a>
+        <a href="./lab3/" class="dropdown-item text-decoration-none ">Window Server Active Directory Implementation</a>
     </li>
 <!-- endblock -->
                             </ul>
@@ -89,19 +89,19 @@
                             <ul class="dropdown-menu">
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../certs/" class="dropdown-item text-decoration-none ">IT Certifications</a>
+        <a href="./certs/" class="dropdown-item text-decoration-none ">IT Certifications</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../training/" class="dropdown-item text-decoration-none ">Training Certifications</a>
+        <a href="./training/" class="dropdown-item text-decoration-none ">Training Certifications</a>
     </li>
 <!-- endblock -->
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a class="
-                            nav-link text-gray text-decoration-none" href="../tools/">[Tools]</a>
+                            nav-link text-gray text-decoration-none" href="./tools/">[Tools]</a>
                         </li>
             </ul>
         </li>
@@ -171,60 +171,34 @@
             <main><!-- block search -->
 <div class="collapse" id="collapseExample">
     <div role="search" class="search-box">
-        <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        <form id="rtd-search-form" class="wy-form" action="./search.html" method="get">
             <input type="text" name="q" class="search-query"
             placeholder="Search docs" title="Type search term here" />
         </form>
     </div>
 </div>
 <!-- endblock -->
-                    <!-- block content -->
-<section class="container post">
-    <article>
-        <header>
-            
-                <h1 class="normal title" id="component-title">Network Design with Integrated Firewall Solutions</h1>
-            
-        </header>
-        <p><p><center> <img src="/images/test.jpg" width="750"></center></p>
-<pre><code>In this lab, I used simple Cisco images that support only Ethernet speed because I needed a light option for building the setup. 
-Whether you're doing it physically or virtually, the setup is the same. I only used one Fortinet device because of hardware limitations. 
-The Server that I used here is only a Router and the Vswitch here is a unmanaged switch that replicates a Windows Server.
-</code></pre>
-<h2 id="lab-connectivity-and-addresses"><strong>Lab Connectivity and Addresses</strong></h2>
-<p>Listed here are the subnets and VLANs for each interface and switch. Each switch has its own VLAN and serves as the default gateway for VLANs 10, 20, 30, and 40. Additionally, there is a dedicated subnet specifically for management purposes.</p>
-<p><center><img src="/images/vlans.jpg" width="550"> <img src="/images/vlans2.jpg" width="550"> </center></p>
-<h2 id="redundancy-and-load-balance"><strong>Redundancy and Load Balance</strong></h2>
-<p>I have configured VLAN 10 and 30 on Core1 and VLAN 20 and 40 on Core2 for load balancing purposes. In the table below, the green cells represent the main traffic for each VLAN, while the gray cells indicate backup traffic in case the main Core switch for the VLAN is down.</p>
-<p><center><img src="/images/redundancy.jpg" width="700"></center></p>
-<h2 id="interface-connection"><strong>Interface Connection</strong></h2>
-<p><img src="/images/interface.jpg" width="550">
-<img src="/images/pc_connection.jpg" width="550"></p>
-<h2 id="firewall-configuration-fortinet"><strong>Firewall Configuration (Fortinet)</strong></h2>
-<pre><code>Since I don't have any license, the configuration may be limited due to the free Evaluation License provided by Fortinet, which can be reviewed here. 
-[VM Permanent Evaluation License](https://docs.fortinet.com/document/fortigate/7.4.2/administration-guide/441460)
-</code></pre>
-<h3 id="network-interfaces">Network Interfaces</h3>
-<p>The WAN IP is set to my home network, with the next-hop IP being the default gateway of my router. I am using the WAN IP to configure the Fortinet Firewall.</p>
-<p><center><img src="/images/fortinet_interface.jpg" width="900"></center></p>
-<h3 id="static-configuration">Static Configuration</h3>
-<p><center><img src="/images/fortinet_static.jpg" width="900"></center></p>
-<h3 id="ospf-configuration-default-route-injected">OSPF Configuration (Default Route Injected)</h3>
-<p>I use OSPF to enable routers to reach the LAN network and inject the default route. This ensures that <strong>Core 1</strong> and <strong>Core 2</strong> know how to route packets for which they don't have a specific entry in their routing tables.</p>
-<p><center><img src="/images/fortinet_ospf.jpg" width="900">
-<img src="/images/fortinet_ospf2.jpg" width="500"></center></p>
-<h3 id="firewall-policies">Firewall Policies</h3>
-<p>I configured two policies for traffic from Core1 and Core2, without utilizing features such as antivirus or web policies.</p>
-<p><img src="/images/fortinet_policy.jpg" width="900">
-<img src="/images/fortinet_policy2.jpg" width="900"></p>
-<h2 id="configuration-of-each-device">Configuration of Each Device</h2>
-<pre><code>I will include the commands, firewall configuration, and the Excel file used for the design in 
-my GitHub repository.
-</code></pre>
-<p><a href="https://github.com/JaysonFormat/Laboratory"> Device Configuration</a></p></p>
-    </article>
-</section>
-<!-- endblock -->
+    <!-- block search -->
+	<section class="p-md-5 content-search">
+		<article class="search-box">
+			<p></p>
+			<h1 id="search">Search Results</h1>
+			<hr>
+
+			<form id="content_search" action="search.html">
+				<span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+				<input name="q" id="mkdocs-search-query" type="text" class="search-query search_input search-query ui-autocomplete-input"
+					placeholder="Search the Docs" autocomplete="off" autofocus title="Type search term here">
+			</form>
+
+			<div id="mkdocs-search-results" class="search-results" data-no-results-text="No results found">
+				Searching...
+			</div>
+
+		</article>
+	</section>
+    <!-- endblock -->
+
             </main>
 
             
@@ -252,11 +226,11 @@ my GitHub repository.
             
         </div>
 
-            <script>var base_url = '..';</script>
-            <script src="../assets/js/jquery-3.3.1.slim.min.js""></script>
-            <script src="../assets/js/bootstrap.bundle.min.js""></script>
-            <script src="../assets/js/main.min.js""></script>
-                <script src="../search/main.js" defer></script>
+            <script>var base_url = '.';</script>
+            <script src="./assets/js/jquery-3.3.1.slim.min.js""></script>
+            <script src="./assets/js/bootstrap.bundle.min.js""></script>
+            <script src="./assets/js/main.min.js""></script>
+                <script src="./search/main.js" defer></script>
 
     </body>
 
