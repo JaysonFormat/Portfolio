@@ -250,29 +250,27 @@ Core1#
     Core1(config)#
 </code></pre>
 <p>Core1 Verification</p>
-<pre><code>``` core1verify
-Core1#show ip interface brief
-Interface              IP-Address      OK? Method Status                Protocol
-GigabitEthernet0/2     unassigned      YES unset  up                    up
-GigabitEthernet0/3     unassigned      YES unset  down                  down
-GigabitEthernet0/0     unassigned      YES unset  down                  down
-GigabitEthernet0/1     unassigned      YES unset  down                  down
-GigabitEthernet1/0     unassigned      YES unset  down                  down
-GigabitEthernet1/1     unassigned      YES unset  up                    up
-GigabitEthernet1/2     unassigned      YES unset  up                    up
-GigabitEthernet1/3     unassigned      YES unset  up                    up
-GigabitEthernet2/0     unassigned      YES unset  down                  down
-GigabitEthernet2/1     unassigned      YES unset  down                  down
-GigabitEthernet2/2     unassigned      YES unset  down                  down
-GigabitEthernet2/3     unassigned      YES unset  down                  down
-GigabitEthernet3/0     unassigned      YES unset  down                  down
-GigabitEthernet3/1     unassigned      YES unset  down                  down
-GigabitEthernet3/2     unassigned      YES unset  down                  down
-GigabitEthernet3/3     unassigned      YES unset  down                  down
-Vlan10                 172.10.10.254   YES NVRAM  up                    up
-Vlan20                 172.20.20.254   YES NVRAM  up                    up
-Vlan30                 172.30.30.254   YES NVRAM  up                    up
-```
+<pre><code>    Core1#show ip interface brief
+    Interface              IP-Address      OK? Method Status                Protocol
+    GigabitEthernet0/2     unassigned      YES unset  up                    up
+    GigabitEthernet0/3     unassigned      YES unset  down                  down
+    GigabitEthernet0/0     unassigned      YES unset  down                  down
+    GigabitEthernet0/1     unassigned      YES unset  down                  down
+    GigabitEthernet1/0     unassigned      YES unset  down                  down
+    GigabitEthernet1/1     unassigned      YES unset  up                    up
+    GigabitEthernet1/2     unassigned      YES unset  up                    up
+    GigabitEthernet1/3     unassigned      YES unset  up                    up
+    GigabitEthernet2/0     unassigned      YES unset  down                  down
+    GigabitEthernet2/1     unassigned      YES unset  down                  down
+    GigabitEthernet2/2     unassigned      YES unset  down                  down
+    GigabitEthernet2/3     unassigned      YES unset  down                  down
+    GigabitEthernet3/0     unassigned      YES unset  down                  down
+    GigabitEthernet3/1     unassigned      YES unset  down                  down
+    GigabitEthernet3/2     unassigned      YES unset  down                  down
+    GigabitEthernet3/3     unassigned      YES unset  down                  down
+    Vlan10                 172.10.10.254   YES NVRAM  up                    up
+    Vlan20                 172.20.20.254   YES NVRAM  up                    up
+    Vlan30                 172.30.30.254   YES NVRAM  up                    up
 </code></pre>
 <p>Now, we create routed ports connected to the server and router. <code>The network between the server and Core1 is 10.0.10.0/30, and between R1 and Core1 is 10.0.11.0/30</code>.</p>
 <pre><code>Core1(config)#
